@@ -19,10 +19,8 @@
 
 (define (approximation count)
   (let ([in-circle
-          (length
-            (filter
-              (lambda (p) (<= (dist p) radius))
-              (random-points count)))])
+          (length (filter (lambda (p) (<= (dist p) radius))
+                          (random-points count)))])
     (* 4 (/ in-circle count))))
 
 (for ([count (in-range 1 100000)])
