@@ -7,17 +7,15 @@
         [y (cdr p)])
     (sqrt (+ (expt x 2) (expt y 2)))))
 
-(define (random-point)
-  (let ([x (* (random) radius)]
-        [y (* (random) radius)])
-    (cons x y)))
-
-(define (random-points count)
-  (if (zero? count)
-    '()
-    (cons (random-point) (random-points (- count 1)))))
-
 (define (approximation count)
+  (define (random-points count)
+    (let ([random-point
+            (lambda ()
+              (let ([x (* radius (random))]
+                    [y (* radius (random))])
+                (cons x y)))])
+      (if (zero? count) '()
+          (cons (random-point) (random-points (- count 1))))))
   (let ([in-circle
           (length (filter (lambda (p) (<= (dist p) radius))
                           (random-points count)))])

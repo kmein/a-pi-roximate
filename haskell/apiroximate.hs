@@ -10,14 +10,11 @@ data Point = Point Double Double
 
 dist (Point x y) = sqrt (x^2 + y^2)
 
-randomPoint = scale radius <$> (Point <$> randomIO <*> randomIO)
-  where
-    scale r (Point x y) = Point (r * x) (r * y)
-
-randomPoints = flip replicateM randomPoint
-
 approximate :: Int -> IO Double
 approximate count = do
+    let scale r (Point x y) = Point (r * x) (r * y)
+        randomPoint = scale radius <$> (Point <$> randomIO <*> randomIO)
+        randomPoints = flip replicateM randomPoint
     inCircle <- (length . filter (\p -> dist p <= radius)) <$> randomPoints count
     pure $ 4 * (fromIntegral inCircle / fromIntegral count)
 
