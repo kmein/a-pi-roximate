@@ -3,8 +3,6 @@
 #include <math.h>
 #include <time.h>
 
-#define RADIUS 20.0
-
 struct point {
     double x;
     double y;
@@ -16,8 +14,8 @@ double distance(const struct point *p) {
 
 struct point random_point() {
     struct point p;
-    p.x = RADIUS * (double)rand() / RAND_MAX;
-    p.y = RADIUS * (double)rand() / RAND_MAX;
+    p.x = (double)rand() / RAND_MAX;
+    p.y = (double)rand() / RAND_MAX;
     return p;
 }
 
@@ -33,7 +31,7 @@ double approximate(unsigned int count) {
     unsigned int in_circle = 0;
     struct point *points = random_points(count);
     for (int i = 0; i < count; i++) {
-        if (distance(&points[i]) <= RADIUS) {
+        if (distance(&points[i]) <= 1) {
             in_circle++;
         }
     }

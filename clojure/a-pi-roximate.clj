@@ -1,5 +1,3 @@
-(def radius 20.0)
-
 (defrecord Point [x y])
 
 (defn dist [p]
@@ -8,11 +6,11 @@
 
 (defn approximation [c]
   (letfn
-    [(random-point [] (Point. (rand radius) (rand radius)))
+    [(random-point [] (Point. (rand) (rand)))
      (random-points [c]
        (if (zero? c) []
          (cons (random-point) (random-points (dec c)))))]
-    (let [in-circle (count (filter (fn [p] (<= (dist p) radius)) (random-points c)))]
+    (let [in-circle (count (filter (fn [p] (<= (dist p) 1)) (random-points c)))]
       (* 4 (/ in-circle c)))))
 
 (for [c (range 100000)]

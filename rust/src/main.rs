@@ -2,8 +2,6 @@ extern crate rand;
 
 use rand::{Rng, thread_rng};
 
-const RADIUS: f64 = 20.0;
-
 struct Point { x: f64, y: f64 }
 
 impl Point {
@@ -13,8 +11,8 @@ impl Point {
 
     fn random() -> Self {
         Point {
-            x: thread_rng().next_f64() * RADIUS,
-            y: thread_rng().next_f64() * RADIUS,
+            x: thread_rng().next_f64(),
+            y: thread_rng().next_f64(),
         }
     }
 
@@ -28,7 +26,7 @@ impl Point {
 }
 
 fn approximate(count: usize) -> f64 {
-    let in_circle_count = Point::randoms(count).iter().filter(|&v| v.dist() <= RADIUS).count();
+    let in_circle_count = Point::randoms(count).iter().filter(|&v| v.dist() <= 1.0).count();
     4.0 * (in_circle_count as f64 / count as f64)
 }
 

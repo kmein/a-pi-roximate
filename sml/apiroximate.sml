@@ -1,6 +1,5 @@
 type Point = {x: real, y: real}
 
-val radius: real = 20.0
 val rand = Random.rand(0, 0)
 
 fun distance(p: Point): real =
@@ -9,10 +8,10 @@ fun distance(p: Point): real =
 fun approximation(count: int): real =
   let
     fun randomPoint(): Point =
-      {x = Random.randReal rand * radius, y = Random.randReal rand * radius}
+      {x = Random.randReal rand, y = Random.randReal rand}
     fun randoms 0 = []
       | randoms n = randomPoint() :: randoms (n-1)
-    val inCircle = List.length(List.filter (fn p => distance p <= radius) (randoms count))
+    val inCircle = List.length(List.filter (fn p => distance p <= 1.0) (randoms count))
   in
     4.0 * real inCircle / real count
   end
