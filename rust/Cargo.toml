@@ -3,4 +3,5 @@ authors = ["kmein <kieran.meinhardt@gmail.com>"]
 name = "a-pi-roximate"
 version = "0.1.0"
 [dependencies]
+num-complex = "*"
 rand = "*"

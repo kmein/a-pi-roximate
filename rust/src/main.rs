@@ -1,32 +1,24 @@
+extern crate num_complex;
 extern crate rand;
+use num_complex::Complex;
+use rand::{thread_rng, Rng};
 
-use rand::{Rng, thread_rng};
-
-struct Point { x: f64, y: f64 }
-
-impl Point {
-    fn dist(&self) -> f64 {
-        (self.x.powi(2) + self.y.powi(2)).sqrt()
+fn random_points(count: usize) -> Vec<Complex<f64>> {
+    let mut result = Vec::new();
+    for _ in 1..count {
+        result.push(Complex::new(
+            thread_rng().next_f64(),
+            thread_rng().next_f64(),
+        ));
     }
-
-    fn random() -> Self {
-        Point {
-            x: thread_rng().next_f64(),
-            y: thread_rng().next_f64(),
-        }
-    }
-
-    fn randoms(count: usize) -> Vec<Self> {
-        let mut result = Vec::new();
-        for _ in 1..count {
-            result.push(Self::random());
-        }
-        result
-    }
+    result
 }
 
 fn approximate(count: usize) -> f64 {
-    let in_circle_count = Point::randoms(count).iter().filter(|&v| v.dist() <= 1.0).count();
+    let in_circle_count = random_points(count)
+        .iter()
+        .filter(|&v| v.norm_sqr().sqrt() <= 1.0)
+        .count();
     4.0 * (in_circle_count as f64 / count as f64)
 }
 
