@@ -1,17 +1,12 @@
 #lang racket
 
-(define (dist p)
-  (let ([x (car p)]
-        [y (cdr p)])
-    (sqrt (+ (expt x 2) (expt y 2)))))
-
 (define (approximation count)
   (define (random-points count)
-    (let ([random-point (lambda () (cons (random) (random)))])
+    (let ([random-point (lambda () (make-rectangular (random) (random)))])
       (if (zero? count) '()
           (cons (random-point) (random-points (- count 1))))))
   (let ([in-circle
-          (length (filter (lambda (p) (<= (dist p) 1))
+          (length (filter (lambda (p) (<= (magnitude p) 1))
                           (random-points count)))])
     (* 4 (/ in-circle count))))
 
