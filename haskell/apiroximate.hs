@@ -1,7 +1,7 @@
 #!/usr/bin/env stack
 -- stack --resolver lts-11.1 --install-ghc runghc --package random
 {-# LANGUAGE TypeApplications #-}
-import Data.Complex
+import Data.Complex (Complex(..), magnitude)
 import Control.Monad (replicateM, forM_)
 import System.Random (randomIO)
 import Text.Printf (printf)
