@@ -1,3 +1,4 @@
 rust/target/
 ocaml/apiroximate
 c/apiroximate
+scala/*.class
